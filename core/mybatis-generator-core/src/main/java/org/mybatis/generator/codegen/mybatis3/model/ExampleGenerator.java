@@ -1,5 +1,5 @@
 /**
- *    Copyright 2006-2017 the original author or authors.
+ *    Copyright 2006-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ import org.mybatis.generator.api.dom.java.InnerClass;
 import org.mybatis.generator.api.dom.java.JavaVisibility;
 import org.mybatis.generator.api.dom.java.Method;
 import org.mybatis.generator.api.dom.java.Parameter;
+import org.mybatis.generator.api.dom.java.PrimitiveTypeWrapper;
 import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.codegen.AbstractJavaGenerator;
 import org.mybatis.generator.codegen.mybatis3.MyBatis3FormattingUtilities;
@@ -123,6 +124,56 @@ public class ExampleGenerator extends AbstractJavaGenerator {
         commentGenerator.addGeneralMethodComment(method, introspectedTable);
         topLevelClass.addMethod(method);
 
+        // add field, getter, setter for offset
+        field = new Field();
+        field.setVisibility(JavaVisibility.PROTECTED);
+        field.setType(PrimitiveTypeWrapper.getIntegerInstance());
+        field.setName("offset"); //$NON-NLS-1$
+        commentGenerator.addFieldComment(field, introspectedTable);
+        topLevelClass.addField(field);
+
+        method = new Method();
+        method.setVisibility(JavaVisibility.PUBLIC);
+        method.setName("setOffset"); //$NON-NLS-1$
+        method.addParameter(new Parameter(PrimitiveTypeWrapper
+                .getIntegerInstance(), "offset")); //$NON-NLS-1$
+        method.addBodyLine("this.offset = offset;"); //$NON-NLS-1$
+        commentGenerator.addGeneralMethodComment(method, introspectedTable);
+        topLevelClass.addMethod(method);
+
+        method = new Method();
+        method.setVisibility(JavaVisibility.PUBLIC);
+        method.setReturnType(PrimitiveTypeWrapper.getIntegerInstance());
+        method.setName("getOffset"); //$NON-NLS-1$
+        method.addBodyLine("return offset;"); //$NON-NLS-1$
+        commentGenerator.addGeneralMethodComment(method, introspectedTable);
+        topLevelClass.addMethod(method);
+        
+        // add field, getter, setter for offset
+        field = new Field();
+        field.setVisibility(JavaVisibility.PROTECTED);
+        field.setType(PrimitiveTypeWrapper.getIntegerInstance());
+        field.setName("count"); //$NON-NLS-1$
+        commentGenerator.addFieldComment(field, introspectedTable);
+        topLevelClass.addField(field);
+
+        method = new Method();
+        method.setVisibility(JavaVisibility.PUBLIC);
+        method.setName("setCount"); //$NON-NLS-1$
+        method.addParameter(new Parameter(PrimitiveTypeWrapper
+                .getIntegerInstance(), "count")); //$NON-NLS-1$
+        method.addBodyLine("this.count = count;"); //$NON-NLS-1$
+        commentGenerator.addGeneralMethodComment(method, introspectedTable);
+        topLevelClass.addMethod(method);
+
+        method = new Method();
+        method.setVisibility(JavaVisibility.PUBLIC);
+        method.setReturnType(PrimitiveTypeWrapper.getIntegerInstance());
+        method.setName("getCount"); //$NON-NLS-1$
+        method.addBodyLine("return count;"); //$NON-NLS-1$
+        commentGenerator.addGeneralMethodComment(method, introspectedTable);
+        topLevelClass.addMethod(method);
+      
         // add field and methods for the list of ored criteria
         field = new Field();
         field.setVisibility(JavaVisibility.PROTECTED);
